@@ -21,6 +21,8 @@ function doPost(e) {
     // Add the data as a new row in the sheet
     sheet.appendRow([name, email, phone, timestamp]);
     
+    sendEmail();
+    
     // Return a success response
     return ContentService
       .createTextOutput(JSON.stringify({ "result": "success" }))
@@ -32,4 +34,13 @@ function doPost(e) {
       .createTextOutput(JSON.stringify({ "result": "error", "message": error.toString() }))
       .setMimeType(ContentService.MimeType.JSON);
   }
+}
+
+
+function sendEmail() {
+  var recipient = "info@placibo.in";
+  var subject = "New User Registered";
+  var body = "";
+
+  MailApp.sendEmail(recipient, subject, body);
 }
